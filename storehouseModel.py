@@ -5,6 +5,7 @@ import constants as const
 
 
 class Storehouse:
+    """Storehouse model"""
 
     def __init__(self, parameters):
         """

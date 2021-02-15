@@ -1,4 +1,4 @@
-# File with style-settings for application
+# File with style-settings for application's interface
 
 font_name = "Helvetica"
 

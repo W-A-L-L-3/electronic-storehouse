@@ -48,10 +48,17 @@ class MainMenu(tk.Frame):
         if result == exceptions.OK:
             mb.InfoMb(title=text.successful_init["title"],
                       message=text.successful_init["message"]).show()
-
+            self.__activate_btns()
         elif result == exceptions.RECEIVING_ERROR:
             mb.ErrorMb(title=text.receiving_error["title"],
                        message=text.receiving_error["message"]).show()
+
+    def __activate_btns(self):
+        """Activate buttons for interacting with storehouse"""
+        self.__add_btn["state"] = tk.ACTIVE
+        self.__info_btn["state"] = tk.ACTIVE
+        self.__remove_btn["state"] = tk.ACTIVE
+        self.__remote_info_btn["state"] = tk.ACTIVE
 
     def draw(self):
         self.__init_btn.pack(pady=style.Btn.pady)
