@@ -1,20 +1,23 @@
+# File with my requests operations
+
 import requests
 from requests.exceptions import ConnectionError
 
+import constants as const
+import exceptions
 
-def get_storehouse_size():
+
+def get_parameters():
     try:
-        response = requests.get(f'http://127.0.0.1:5000/scheme')
+        response = requests.get(const.GET_PARAMS_ADDRESS)
     except ConnectionError:
-        print('Connection Error')
+        raise exceptions.ReceivingError
     else:
-        if response.status_code == 200:  # If request completed successfully
-            res = response.json()
-        else:
-            res = None
-        return res
+        if response.status_code != 200:  # If request is not completed successfully
+            raise exceptions.ReceivingError
+        return response.json()
 
 
 if __name__ == "__main__":
-    size = get_storehouse_size()
-    print(size)
+    params = get_parameters()
+    print(params)
