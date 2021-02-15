@@ -22,5 +22,6 @@ info_header = [
     "№",
     "Name",
     "Size",
-    "Mass"
+    "Mass",
+    "Position"
 ]

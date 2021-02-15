@@ -67,5 +67,4 @@ class InfoWindow(ChildWindow):
 
     def draw(self):
         self.__table.draw()
-        print("table draw")
         self.set_focus()

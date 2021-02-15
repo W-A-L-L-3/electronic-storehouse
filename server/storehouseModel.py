@@ -26,7 +26,7 @@ class Storehouse:
         self.__merged = parameters["merged"]
         self.__all_items = []
 
-        self.__all_items.append(Item("Test", (1, 1, 1), 100))
+        self.__test_fill_items()
 
     def __repr__(self):
         res = f"""
@@ -42,6 +42,12 @@ class Storehouse:
     def all_items(self):
         return self.__all_items
 
+    def __test_fill_items(self):
+        """Filling items for test"""
+        for i in range(10):
+            self.__all_items.append(
+                Item(f"Test{i}{str(i) * i}", (i * 1000, i * 1000, i * 1000), i * 100, "A1"))
+
 
 class Size:
     """Class for storehouse sizes"""
@@ -53,15 +59,17 @@ class Size:
 
 
 class Item:
-    def __init__(self, name, size, mass):
+    def __init__(self, name, size, mass, pos):
         """
-        :param name: Name of item <str>
-        :param size: Size of item <tuple> (x, y, z)
-        :param mass: Mass of item <int>
+        :param name: Name of the item <str>
+        :param size: Size of the item <tuple> (x, y, z)
+        :param mass: Mass of the item <int>
+        :param mass: Position of the item <str>
         """
         self.name = name
         self.size = size
         self.mass = mass
+        self.pos = pos
 
     def __repr__(self):
         return f"Name: {self.name}. Size: {self.size}. Mass: {self.mass}"
