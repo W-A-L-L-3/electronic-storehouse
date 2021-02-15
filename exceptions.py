@@ -5,5 +5,4 @@ OK = 0
 
 
 class ReceivingError(Exception):
-    def __init__(self):
-        pass
+    pass

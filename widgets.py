@@ -2,6 +2,8 @@
 
 import tkinter as tk
 
+import exceptions
+import messageboxes as mb
 import style
 import text
 
@@ -41,8 +43,15 @@ class MainMenu(tk.Frame):
                                            state=tk.DISABLED)
 
     def __call_init(self):
-        print("call init")
-        print("res:", self.__init_func())
+        """Call init function and show results"""
+        result = self.__init_func()
+        if result == exceptions.OK:
+            mb.InfoMb(title=text.successful_init["title"],
+                      message=text.successful_init["message"]).show()
+
+        elif result == exceptions.RECEIVING_ERROR:
+            mb.ErrorMb(title=text.receiving_error["title"],
+                       message=text.receiving_error["message"]).show()
 
     def draw(self):
         self.__init_btn.pack(pady=style.Btn.pady)
