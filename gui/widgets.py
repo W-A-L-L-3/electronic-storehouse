@@ -3,9 +3,8 @@
 import tkinter as tk
 
 import exceptions
-import messageboxes as mb
-import style
 import text
+from gui import messageboxes as mb, style
 
 
 class MainMenu(tk.Frame):
