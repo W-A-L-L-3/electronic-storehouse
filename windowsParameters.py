@@ -17,7 +17,7 @@ class WindowParams(SizeParams):
         self.title = title
         super().__init__(width, height, padx, pady)
         self.resizable = (False, False)
-        self.ico_path = ""  # Path to application's icon
+        self.ico_path = "img/program_icon32.ico"  # Path to application's icon
 
     def geometry(self):
         """Geometry by Tkinter's standard"""
