@@ -8,3 +8,8 @@ class Btn:
     font = (font_name, 11)
     width = 28
     pady = 5
+
+class InfoTable:
+    """Style-settings for table with info"""
+    padx = 10
+    pady = 5
