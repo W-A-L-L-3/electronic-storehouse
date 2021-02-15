@@ -2,9 +2,9 @@
 
 main_menu = {
     "init": "Initialize storehouse",
-    "add": "Add products to the storehouse",
+    "add": "Add items to the storehouse",
     "info": "Information about storehouse",
-    "remove": "Remove product from the storehouse",
+    "remove": "Remove item from the storehouse",
     "remote_info": "Information about remote storehouse"
 }
 
@@ -17,3 +17,10 @@ receiving_error = {
     "title": "Receiving error",
     "message": "An error occurred while getting the parameters."
 }
+
+info_header = [
+    "№",
+    "Name",
+    "Size",
+    "Mass"
+]

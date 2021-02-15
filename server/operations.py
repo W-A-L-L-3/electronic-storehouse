@@ -1,5 +1,8 @@
 # File with server's operations
 
+import pickle
+
+import constants as const
 import exceptions
 import server.myRequests as myRequests
 from server.storehouseModel import Storehouse
@@ -19,6 +22,23 @@ def init():
         return exceptions.RECEIVING_ERROR
     else:
         storehouse = Storehouse(parameters)
-    storehouse.save()
+    save_storehouse(storehouse)
 
     return exceptions.OK
+
+
+def save_storehouse(storehouse):
+    """Save storehouse-object to the file"""
+    with open(const.STOREHOUSE_FILE_NAME, 'wb') as file:
+        pickle.dump(storehouse, file)
+
+
+def upload_storehouse():
+    """Upload storehouse-object from the file"""
+    with open(const.STOREHOUSE_FILE_NAME, 'rb') as file:
+        return pickle.load(file)
+
+
+def get_info():
+    storehouse = upload_storehouse()
+    return storehouse.all_items
