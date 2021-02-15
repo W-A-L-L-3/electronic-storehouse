@@ -40,4 +40,4 @@ class MainMenu(tk.Frame):
         self.__info_btn.pack(pady=style.Btn.pady)
         self.__remove_btn.pack(pady=style.Btn.pady)
         self.__remote_info_btn.pack(pady=style.Btn.pady)
-        self.pack(padx=10, pady=10)
+        self.pack(padx=20, pady=15)
