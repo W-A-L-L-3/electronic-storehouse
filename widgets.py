@@ -42,7 +42,7 @@ class MainMenu(tk.Frame):
 
     def __call_init(self):
         print("call init")
-        self.__init_func()
+        print("res:", self.__init_func())
 
     def draw(self):
         self.__init_btn.pack(pady=style.Btn.pady)
