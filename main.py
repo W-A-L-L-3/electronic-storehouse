@@ -11,7 +11,7 @@ class MainWindow(tk.Tk):
 
     def __init__(self):
         super().__init__()
-        self.parameters = WindowParams(title="Electronic storehouse")
+        self.parameters = WindowParams(title="Electronic storehouse", pady=300, padx=300)
         self.title(self.parameters.title)
         self.geometry(self.parameters.geometry())
         self.resizable(*self.parameters.resizable)
