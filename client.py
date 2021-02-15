@@ -2,6 +2,7 @@
 
 import tkinter as tk
 
+import server
 from widgets import MainMenu
 from windowsParameters import WindowParams
 
@@ -19,7 +20,7 @@ class MainWindow(tk.Tk):
             self.iconbitmap(self.parameters.ico_path)
         except tk.TclError:  # Icon display error
             pass  # Default Tkinter's icon
-        self.__menu = MainMenu(self)
+        self.__menu = MainMenu(self, init_func=server.init)
 
     def run(self):
         """Launching the app"""
