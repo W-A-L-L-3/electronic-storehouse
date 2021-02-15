@@ -1,8 +1,8 @@
 # File with server's operations
 
 import exceptions
-import myRequests
-from storehouseModel import Storehouse
+import server.myRequests as myRequests
+from server.storehouseModel import Storehouse
 
 
 def init():
