@@ -8,9 +8,10 @@ from gui import messageboxes as mb, style
 
 
 class MainMenu(tk.Frame):
-    def __init__(self, window, init_func):
+    def __init__(self, window, init_func, info_func):
         super().__init__(window)
         self.__init_func = init_func
+        self.__info_func = info_func
         self.__init_btn = tk.Button(self,
                                     text=text.main_menu["init"],
                                     font=style.Btn.font,
@@ -27,7 +28,8 @@ class MainMenu(tk.Frame):
                                     text=text.main_menu["info"],
                                     font=style.Btn.font,
                                     width=style.Btn.width,
-                                    state=tk.DISABLED)
+                                    state=tk.DISABLED,
+                                    command=self.__info_func)
 
         self.__remove_btn = tk.Button(self,
                                       text=text.main_menu["remove"],

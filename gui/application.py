@@ -20,9 +20,22 @@ class MainWindow(tk.Tk):
             self.iconbitmap(self.parameters.ico_path)
         except tk.TclError:  # Icon display error
             pass  # Default Tkinter's icon
-        self.__menu = MainMenu(self, init_func=server_operations.init)
+        self.__menu = MainMenu(self,
+                               init_func=server_operations.init,
+                               info_func=self.open_info_window)
 
     def run(self):
         """Launching the app"""
         self.__menu.draw()
         self.mainloop()
+
+    def open_info_window(self):
+        info_window = InfoWindow(self)
+
+
+class InfoWindow(tk.Toplevel):
+    def __init__(self, parent):
+        super().__init__(parent)
+        self.grab_set()
+        self.focus_set()
+        self.wait_window()
