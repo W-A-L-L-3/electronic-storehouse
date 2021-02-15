@@ -1,4 +1,8 @@
 # File with storehouse model's class
+import pickle
+
+import constants as const
+
 
 class Storehouse:
 
@@ -32,6 +36,11 @@ class Storehouse:
 "merged": {self.__merged}
 """
         return res
+
+    def save(self):
+        """Save self-object to the file"""
+        with open(const.STOREHOUSE_FILE_NAME, 'wb') as file:
+            pickle.dump(self, file)
 
 
 class Size:
