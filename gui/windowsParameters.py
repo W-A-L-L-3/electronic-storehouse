@@ -13,10 +13,11 @@ class SizeParams:
 class WindowParams(SizeParams):
     """Class of parameters for window"""
 
-    def __init__(self, title="", width=None, height=None, padx=None, pady=None):
+    def __init__(self, title="", width=None, height=None,
+                 padx=None, pady=None, resizable=(True, True)):
         self.title = title
         super().__init__(width, height, padx, pady)
-        self.resizable = (False, False)
+        self.resizable = resizable
         self.ico_path = "./gui/img/program_icon32.ico"  # Path to application's icon
 
     def geometry(self):

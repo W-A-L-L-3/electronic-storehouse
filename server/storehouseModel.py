@@ -1,7 +1,4 @@
 # File with storehouse model's class
-import pickle
-
-import constants as const
 
 
 class Storehouse:
@@ -27,6 +24,9 @@ class Storehouse:
         size = parameters["size"]
         self.__size = Size(size)
         self.__merged = parameters["merged"]
+        self.__all_items = []
+
+        self.__test_fill_items()
 
     def __repr__(self):
         res = f"""
@@ -38,10 +38,15 @@ class Storehouse:
 """
         return res
 
-    def save(self):
-        """Save self-object to the file"""
-        with open(const.STOREHOUSE_FILE_NAME, 'wb') as file:
-            pickle.dump(self, file)
+    @property
+    def all_items(self):
+        return self.__all_items
+
+    def __test_fill_items(self):
+        """Filling items for test"""
+        for i in range(10):
+            self.__all_items.append(
+                Item(f"Test{i}{str(i) * i}", (i * 1000, i * 1000, i * 1000), i * 100, "A1"))
 
 
 class Size:
@@ -51,3 +56,20 @@ class Size:
         self.x = size["size_x"]
         self.y = size["size_y"]
         self.z = size["size_z"]
+
+
+class Item:
+    def __init__(self, name, size, mass, pos):
+        """
+        :param name: Name of the item <str>
+        :param size: Size of the item <tuple> (x, y, z)
+        :param mass: Mass of the item <int>
+        :param mass: Position of the item <str>
+        """
+        self.name = name
+        self.size = size
+        self.mass = mass
+        self.pos = pos
+
+    def __repr__(self):
+        return f"Name: {self.name}. Size: {self.size}. Mass: {self.mass}"
