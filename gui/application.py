@@ -3,7 +3,7 @@
 import tkinter as tk
 
 import server.operations as server_operations
-from gui.widgets import MainMenu, InfoTable, AddRows, AddButtons
+from gui.widgets import MainMenu, InfoTable, AddingWRows, AddingWButtons
 from gui.windowsParameters import WindowParams
 
 
@@ -42,6 +42,7 @@ class MainWindow(tk.Tk):
         self.adding_window = AddingWindow(self)
         self.adding_window.draw()
 
+
 class ChildWindow(tk.Toplevel):
     def __init__(self, parent, title="", width=None, height=None,
                  padx=None, pady=None, resizable=(True, True)):
@@ -66,7 +67,9 @@ class InfoWindow(ChildWindow):
     """Class of window for information about storehouse"""
 
     def __init__(self, parent, table):
-        super().__init__(parent, title="Information about storehouse")
+        super().__init__(parent,
+                         title="Information about storehouse",
+                         resizable=(False, False))
         self.__table = InfoTable(self, table)
 
     def draw(self):
@@ -78,9 +81,13 @@ class AddingWindow(ChildWindow):
     """Class of window for adding items to the storehouse"""
 
     def __init__(self, parent):
-        super().__init__(parent, title="Add items to the storehouse")
-        self.__rows = AddRows(self)
-        self.__buttons = AddButtons(self)
+        super().__init__(parent,
+                         title="Add items to the storehouse",
+                         resizable=(False, False))
+        self.__rows = AddingWRows(self)
+        self.__buttons = AddingWButtons(self,
+                                        add_row_func=self.__rows.add_row,
+                                        enter_func=None)
 
     def draw(self):
         self.__rows.draw()

@@ -27,3 +27,4 @@ info_header = [
 ]
 
 enter_btn = "Enter"
+add_row_btn = "Add row"

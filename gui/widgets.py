@@ -2,6 +2,7 @@
 
 import tkinter as tk
 
+import constants as const
 import exceptions
 import text
 from gui import messageboxes as mb, style
@@ -16,33 +17,33 @@ class MainMenu(tk.Frame):
         self.__init_btn = tk.Button(self,
                                     text=text.main_menu["init"],
                                     font=style.Btn.font,
-                                    width=style.Btn.width,
+                                    width=style.Btn.big_width,
                                     command=self.__call_init)
 
         self.__add_btn = tk.Button(self,
                                    text=text.main_menu["add"],
                                    font=style.Btn.font,
-                                   width=style.Btn.width,
+                                   width=style.Btn.big_width,
                                    state=tk.DISABLED,
                                    command=self.__add_func)
 
         self.__info_btn = tk.Button(self,
                                     text=text.main_menu["info"],
                                     font=style.Btn.font,
-                                    width=style.Btn.width,
+                                    width=style.Btn.big_width,
                                     state=tk.DISABLED,
                                     command=self.__info_func)
 
         self.__remove_btn = tk.Button(self,
                                       text=text.main_menu["remove"],
                                       font=style.Btn.font,
-                                      width=style.Btn.width,
+                                      width=style.Btn.big_width,
                                       state=tk.DISABLED)
 
         self.__remote_info_btn = tk.Button(self,
                                            text=text.main_menu["remote_info"],
                                            font=style.Btn.font,
-                                           width=style.Btn.width,
+                                           width=style.Btn.big_width,
                                            state=tk.DISABLED)
 
     def __call_init(self):
@@ -75,7 +76,7 @@ class MainMenu(tk.Frame):
 class InfoTable(tk.Frame):
     def __init__(self, window, table):
         super().__init__(window)
-        self.__header = InfoHeader(self)
+        self.__header = Header(self, need_pos_column=True)
         self.__list = []
         for i in range(len(table)):
             self.__list.append(InfoRow(self, table[i], (1 + i)))
@@ -87,8 +88,8 @@ class InfoTable(tk.Frame):
         self.pack(padx=15, pady=(5, 15))
 
 
-class InfoHeader:
-    def __init__(self, window):
+class Header:
+    def __init__(self, window, need_pos_column=False):
         self.__number = tk.Label(window,
                                  text=text.info_header[0],
                                  font=style.font_name)
@@ -101,21 +102,27 @@ class InfoHeader:
         self.__mass = tk.Label(window,
                                text=text.info_header[3],
                                font=style.font_name)
-        self.__pos = tk.Label(window,
-                              text=text.info_header[4],
-                              font=style.font_name)
+        if need_pos_column:
+            self.__pos = tk.Label(window,
+                                  text=text.info_header[4],
+                                  font=style.font_name)
+        else:
+            self.__pos = None
 
     def draw(self):
         self.__number.grid(row=0, column=0,
-                           padx=(0, style.InfoTable.padx), pady=(0, style.InfoTable.pady * 2))
+                           padx=(0, style.InfoTable.padx), pady=(0, style.InfoTable.pady * 2),
+                           sticky=tk.W)
         self.__name.grid(row=0, column=1,
                          padx=style.InfoTable.padx, pady=(0, style.InfoTable.pady * 2))
         self.__size.grid(row=0, column=2,
                          padx=style.InfoTable.padx, pady=(0, style.InfoTable.pady * 2))
         self.__mass.grid(row=0, column=3,
                          padx=style.InfoTable.padx, pady=(0, style.InfoTable.pady * 2))
-        self.__pos.grid(row=0, column=4,
-                        padx=(style.InfoTable.padx, 0), pady=(0, style.InfoTable.pady * 2))
+
+        if self.__pos is not None:
+            self.__pos.grid(row=0, column=4,
+                            padx=(style.InfoTable.padx, 0), pady=(0, style.InfoTable.pady * 2))
 
 
 class InfoRow:
@@ -161,21 +168,77 @@ class InfoRow:
                         padx=(style.InfoTable.padx, 0), pady=style.InfoTable.pady)
 
 
-class AddRows(tk.Frame):
+class AddingWRows(tk.Frame):
 
     def __init__(self, window):
         super().__init__(window)
+        self.__header = Header(self, need_pos_column=False)
+        self.__list = []
+        self.__list.append(AddingWRow(self, row_ind=1))
+
+    def add_row(self):
+        row = 1 + len(self.__list)
+        if row <= const.MAX_ADDING_ITEMS:
+            self.__list.append(AddingWRow(self, row_ind=row))
+            self.__list[-1].draw()
 
     def draw(self):
-        pass
+        self.__header.draw()
+        for row in self.__list:
+            row.draw()
+        self.pack(padx=(10, 15), pady=(10, 15))
 
 
-class AddButtons(tk.Frame):
+class AddingWRow:
 
-    def __init__(self, window):
+    def __init__(self, window, row_ind):
+        self.__row_ind = row_ind
+
+        self.__number = tk.Label(window,
+                                 text=str(self.__row_ind),
+                                 font=style.font_name)
+
+        self.__name = tk.Entry(window,
+                               font=style.Entry.font,
+                               width=style.Entry.big_width)
+
+        self.__size = tk.Entry(window,
+                               font=style.Entry.font,
+                               width=style.Entry.big_width)
+
+        self.__mass = tk.Entry(window,
+                               font=style.Entry.font,
+                               width=style.Entry.small_width)
+
+    def draw(self):
+        self.__number.grid(row=self.__row_ind, column=0,
+                           padx=style.Entry.padx, pady=style.Entry.pady)
+        self.__name.grid(row=self.__row_ind, column=1,
+                         padx=style.Entry.padx, pady=style.Entry.pady)
+        self.__size.grid(row=self.__row_ind, column=2,
+                         padx=style.Entry.padx, pady=style.Entry.pady)
+        self.__mass.grid(row=self.__row_ind, column=3,
+                         padx=style.Entry.padx, pady=style.Entry.pady)
+
+
+class AddingWButtons(tk.Frame):
+
+    def __init__(self, window, enter_func, add_row_func):
         super().__init__(window)
-        enter_button = tk.Button(self,
-                                 text=text.enter_btn)
+
+        self.__enter_button = tk.Button(self,
+                                        text=text.enter_btn,
+                                        font=style.Btn.font,
+                                        width=style.Btn.small_width,
+                                        command=enter_func)
+
+        self.__add_row_button = tk.Button(self,
+                                          text=text.add_row_btn,
+                                          font=style.Btn.font,
+                                          width=style.Btn.small_width,
+                                          command=add_row_func)
 
     def draw(self):
-        pass
+        self.__enter_button.pack(side=tk.RIGHT, padx=(10, 0))
+        self.__add_row_button.pack(side=tk.RIGHT)
+        self.pack(pady=(0, 10), padx=(0, 15), side=tk.RIGHT)
