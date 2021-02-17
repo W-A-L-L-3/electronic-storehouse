@@ -8,9 +8,10 @@ from gui import messageboxes as mb, style
 
 
 class MainMenu(tk.Frame):
-    def __init__(self, window, init_func, info_func):
+    def __init__(self, window, init_func, add_func, info_func):
         super().__init__(window)
         self.__init_func = init_func
+        self.__add_func = add_func
         self.__info_func = info_func
         self.__init_btn = tk.Button(self,
                                     text=text.main_menu["init"],
@@ -22,7 +23,8 @@ class MainMenu(tk.Frame):
                                    text=text.main_menu["add"],
                                    font=style.Btn.font,
                                    width=style.Btn.width,
-                                   state=tk.DISABLED)
+                                   state=tk.DISABLED,
+                                   command=self.__add_func)
 
         self.__info_btn = tk.Button(self,
                                     text=text.main_menu["info"],
@@ -73,7 +75,7 @@ class MainMenu(tk.Frame):
 class InfoTable(tk.Frame):
     def __init__(self, window, table):
         super().__init__(window)
-        self.__header = Header(self)
+        self.__header = InfoHeader(self)
         self.__list = []
         for i in range(len(table)):
             self.__list.append(InfoRow(self, table[i], (1 + i)))
@@ -85,7 +87,7 @@ class InfoTable(tk.Frame):
         self.pack(padx=15, pady=(5, 15))
 
 
-class Header:
+class InfoHeader:
     def __init__(self, window):
         self.__number = tk.Label(window,
                                  text=text.info_header[0],
@@ -157,3 +159,23 @@ class InfoRow:
                          padx=style.InfoTable.padx, pady=style.InfoTable.pady)
         self.__pos.grid(row=self.__row_ind, column=4,
                         padx=(style.InfoTable.padx, 0), pady=style.InfoTable.pady)
+
+
+class AddRows(tk.Frame):
+
+    def __init__(self, window):
+        super().__init__(window)
+
+    def draw(self):
+        pass
+
+
+class AddButtons(tk.Frame):
+
+    def __init__(self, window):
+        super().__init__(window)
+        enter_button = tk.Button(self,
+                                 text=text.enter_btn)
+
+    def draw(self):
+        pass
