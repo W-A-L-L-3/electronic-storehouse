@@ -3,7 +3,7 @@
 import tkinter as tk
 
 import server.operations as server_operations
-from gui.widgets import MainMenu, InfoTable
+from gui.widgets import MainMenu, InfoTable, AddRows, AddButtons
 from gui.windowsParameters import WindowParams
 
 
@@ -24,6 +24,7 @@ class MainWindow(tk.Tk):
             pass  # Default Tkinter's icon
         self.__menu = MainMenu(self,
                                init_func=server_operations.init,
+                               add_func=self.open_adding_window,
                                info_func=self.open_info_window)
         self.info_window = None
 
@@ -37,6 +38,9 @@ class MainWindow(tk.Tk):
         self.info_window = InfoWindow(self, table)
         self.info_window.draw()
 
+    def open_adding_window(self):
+        self.adding_window = AddingWindow(self)
+        self.adding_window.draw()
 
 class ChildWindow(tk.Toplevel):
     def __init__(self, parent, title="", width=None, height=None,
@@ -67,4 +71,18 @@ class InfoWindow(ChildWindow):
 
     def draw(self):
         self.__table.draw()
+        self.set_focus()
+
+
+class AddingWindow(ChildWindow):
+    """Class of window for adding items to the storehouse"""
+
+    def __init__(self, parent):
+        super().__init__(parent, title="Add items to the storehouse")
+        self.__rows = AddRows(self)
+        self.__buttons = AddButtons(self)
+
+    def draw(self):
+        self.__rows.draw()
+        self.__buttons.draw()
         self.set_focus()

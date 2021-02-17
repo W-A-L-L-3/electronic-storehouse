@@ -25,3 +25,5 @@ info_header = [
     "Mass",
     "Position"
 ]
+
+enter_btn = "Enter"
