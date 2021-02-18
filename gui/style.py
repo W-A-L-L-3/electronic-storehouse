@@ -14,10 +14,17 @@ class Btn:
 class Entry:
     """Style-settings for entries"""
     font = (font_name, 11)
-    big_width = 18
-    small_width = 8
+
+    name_f_width = 18
+    size_f_width = 16
+    mass_f_width = 7
+
     padx = 5
     pady = 5
+
+    ok_color = "#CCFFCF"
+    warning_color = "#FFF7CC"
+    error_color = "#FFCCCC"
 
 
 class InfoTable:
