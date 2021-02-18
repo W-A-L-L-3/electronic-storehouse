@@ -2,69 +2,6 @@
 import exceptions as exc
 
 
-class Storehouse:
-    """Storehouse model"""
-
-    def __init__(self, parameters):
-        """
-        Parameters in format:
-        {
-          "size":
-            {
-              "size_x": <size:int>,
-              "size_y": <size:int>,
-              "size_z": <size:int>
-            },
-          "merged":
-            [
-              [<block:string>, <block:string>],
-              [<block:string>, <block:string>]
-            ]
-        }
-        """
-        size = parameters["size"]
-        self.__size = Size(size)
-        self.__merged = parameters["merged"]
-        self.__all_items = []
-
-        # self.__test_fill_items()
-
-    def __repr__(self):
-        res = f"""
-"size":
-    "size_x": {self.__size.x},
-    "size_y": {self.__size.y},
-    "size_z": {self.__size.z}
-"merged": {self.__merged}
-"""
-        return res
-
-    @property
-    def all_items(self):
-        return self.__all_items
-
-    def add_items(self, items_list):
-        """
-        Add items to the storehouse
-        :param items_list: list of <class 'Item'>
-        """
-        self.__all_items.extend(items_list)
-
-    def remove_item(self, item_name):
-        for item in self.__all_items:
-            if item.name == item_name:
-                self.__all_items.remove(item)
-                break
-        else:
-            raise exc.ItemNotFoundError
-
-    def __test_fill_items(self):
-        """Filling items for test"""
-        for i in range(10):
-            self.__all_items.append(
-                Item(f"Test{i}{str(i) * i}", (i * 1000, i * 1000, i * 1000), i * 100, "A1"))
-
-
 class Size:
     """Class for storehouse sizes"""
 
@@ -94,3 +31,70 @@ class Item:
         m = f"Mass: {self.mass}, Type: {type(self.mass)};\n"
         p = f"Pos : {self.pos}, Type: {type(self.pos)};\n"
         return r + n + s + m + p + r
+
+
+class Storehouse:
+    def __init__(self):
+        self.__all_items = []
+
+    @property
+    def all_items(self):
+        return self.__all_items
+
+    def add_items(self, items_list):
+        """
+        Add items to the storehouse
+        :param items_list: list of <class 'Item'>
+        """
+        self.__all_items.extend(items_list)
+
+    def remove_item(self, item_name):
+        for item in self.__all_items:
+            if item.name == item_name:
+                self.__all_items.remove(item)
+                break
+        else:
+            raise exc.ItemNotFoundError
+
+
+class ElectronicStorehouse(Storehouse):
+    """Electronic storehouse model"""
+
+    def __init__(self, parameters):
+        """
+        Parameters in format:
+        {
+          "size":
+            {
+              "size_x": <size:int>,
+              "size_y": <size:int>,
+              "size_z": <size:int>
+            },
+          "merged":
+            [
+              [<block:string>, <block:string>],
+              [<block:string>, <block:string>]
+            ]
+        }
+        """
+        super().__init__()
+        size = parameters["size"]
+        self.__size = Size(size)
+        self.__merged = parameters["merged"]
+
+        self.remote_part = RemoteStorehouse()
+
+    def __repr__(self):
+        res = f"""
+"size":
+    "size_x": {self.__size.x},
+    "size_y": {self.__size.y},
+    "size_z": {self.__size.z}
+"merged": {self.__merged}
+"""
+        return res
+
+
+class RemoteStorehouse(Storehouse):
+    def __init(self):
+        super().__init__()
