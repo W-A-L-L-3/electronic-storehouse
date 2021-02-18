@@ -6,6 +6,7 @@ import constants as const
 import exceptions
 import text
 from gui import messageboxes as mb, style
+from server.storehouseModel import Item
 
 
 class MainMenu(tk.Frame):
@@ -168,7 +169,7 @@ class InfoRow:
                         padx=(style.InfoTable.padx, 0), pady=style.InfoTable.pady)
 
 
-class AddingWRows(tk.Frame):
+class AddingWList(tk.Frame):
 
     def __init__(self, window):
         super().__init__(window)
@@ -187,6 +188,16 @@ class AddingWRows(tk.Frame):
         for row in self.__list:
             row.draw()
         self.pack(padx=(10, 15), pady=(10, 15))
+
+    def get_list(self):
+        """Return list of items, info about witch in entries"""
+        list = []
+        for row in self.__list:
+            name = row.get_name()
+            size = row.get_size()
+            mass = row.get_mass()
+            list.append(Item(name, size, mass, pos=None))
+        return list
 
 
 class AddingWRow:
@@ -219,6 +230,18 @@ class AddingWRow:
                          padx=style.Entry.padx, pady=style.Entry.pady)
         self.__mass.grid(row=self.__row_ind, column=3,
                          padx=style.Entry.padx, pady=style.Entry.pady)
+
+    def get_name(self):
+        value = str(self.__name.get())
+        return value
+
+    def get_size(self):
+        value = str(self.__size.get())
+        return value
+
+    def get_mass(self):
+        value = str(self.__mass.get())
+        return value
 
 
 class AddingWButtons(tk.Frame):
