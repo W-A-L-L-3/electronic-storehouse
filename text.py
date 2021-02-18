@@ -25,3 +25,16 @@ info_header = [
     "Mass",
     "Position"
 ]
+
+enter_btn = "Enter"
+add_row_btn = "Add row"
+
+entry_content_error = {
+    "title": "Value error",
+    "message": "Invalid value in"
+}
+
+correct_adding = {
+    "title": "Correct adding",
+    "message": "All items was correctly added to the storehouse"
+}

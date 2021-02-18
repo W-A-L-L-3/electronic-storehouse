@@ -72,4 +72,9 @@ class Item:
         self.pos = pos
 
     def __repr__(self):
-        return f"Name: {self.name}. Size: {self.size}. Mass: {self.mass}"
+        r = "==========\n"
+        n = f"Name: {self.name}, Type: {type(self.name)};\n"
+        s = f"Size: {self.size}, Type: {type(self.size)};\n"
+        m = f"Mass: {self.mass}, Type: {type(self.mass)};\n"
+        p = f"Pos : {self.pos}, Type: {type(self.pos)};\n"
+        return r + n + s + m + p + r

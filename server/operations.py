@@ -42,3 +42,10 @@ def upload_storehouse():
 def get_info():
     storehouse = upload_storehouse()
     return storehouse.all_items
+
+def add_items(items_list):
+    """
+    :param items_list: List of <class 'Item'>
+    """
+    for item in items_list:
+        print(item)
