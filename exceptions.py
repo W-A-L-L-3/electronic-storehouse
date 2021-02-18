@@ -14,3 +14,7 @@ class EntryContentError(ValueError):
     def __init__(self, field, exception_type=""):
         self.field = field  # Field index
         self.exception_type = exception_type
+
+
+class ItemNotFoundError(Exception):
+    pass

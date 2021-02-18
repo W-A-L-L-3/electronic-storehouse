@@ -4,7 +4,7 @@ main_menu = {
     "init": "Initialize storehouse",
     "add": "Add items to the storehouse",
     "info": "Information about storehouse",
-    "remove": "Remove item from the storehouse",
+    "take": "Take item from the storehouse",
     "remote_info": "Information about remote storehouse"
 }
 
@@ -37,4 +37,16 @@ entry_content_error = {
 correct_adding = {
     "title": "Correct adding",
     "message": "All items was correctly added to the storehouse"
+}
+
+take_btn = "Take"
+
+item_not_found_error = {
+    "title": "Error",
+    "message": "Item with this name not found"
+}
+
+correct_taking = {
+    "title": "Correct taking",
+    "message": "This item was taken correctly"
 }
