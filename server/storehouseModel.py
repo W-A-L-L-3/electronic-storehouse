@@ -26,7 +26,7 @@ class Storehouse:
         self.__merged = parameters["merged"]
         self.__all_items = []
 
-        self.__test_fill_items()
+        # self.__test_fill_items()
 
     def __repr__(self):
         res = f"""
@@ -41,6 +41,13 @@ class Storehouse:
     @property
     def all_items(self):
         return self.__all_items
+
+    def add_items(self, items_list):
+        """
+        Add items to the storehouse
+        :param items_list: list of <class 'Item'>
+        """
+        self.__all_items.extend(items_list)
 
     def __test_fill_items(self):
         """Filling items for test"""
