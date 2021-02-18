@@ -4,6 +4,7 @@ import tkinter as tk
 
 import constants as const
 import exceptions
+import exceptions as exc
 import text
 from gui import messageboxes as mb, style
 from server.storehouseModel import Item
@@ -169,6 +170,18 @@ class InfoRow:
                         padx=(style.InfoTable.padx, 0), pady=style.InfoTable.pady)
 
 
+def exceptions_tracker(func):
+    def wrapper(*args):
+        try:
+            items_list = func(*args)
+        except exc.EntryContentError as e:
+            mb.ExceptionMb(e).show()
+        else:
+            return items_list
+
+    return wrapper
+
+
 class AddingWList(tk.Frame):
 
     def __init__(self, window):
@@ -189,6 +202,7 @@ class AddingWList(tk.Frame):
             row.draw()
         self.pack(padx=(10, 15), pady=(10, 15))
 
+    @exceptions_tracker
     def get_list(self):
         """Return list of items, info about witch in entries"""
         items_list = []
@@ -292,7 +306,7 @@ class AddingWRow:
         if self.__check_name(value):
             return value
         else:
-            pass
+            raise exc.EntryContentError(const.AddingW.NAME_INDEX)
 
     def formatted_size(self):
         """
@@ -303,7 +317,7 @@ class AddingWRow:
             t = value.split("*")
             return tuple(t)
         else:
-            pass
+            raise exc.EntryContentError(const.AddingW.SIZE_INDEX)
 
     def formatted_mass(self):
         """
@@ -313,7 +327,7 @@ class AddingWRow:
         if self.__check_mass(value):
             return int(value)
         else:
-            pass
+            raise exc.EntryContentError(const.AddingW.MASS_INDEX)
 
     def __color_name(self, event):
         """
