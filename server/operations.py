@@ -39,15 +39,34 @@ def upload_storehouse():
         return pickle.load(file)
 
 
+def storehouse_object(func):
+    """
+    load storehouse-object from file,
+    run func,
+    save storehouse-object to the file
+    """
+
+    def wrapper(*args, **kwargs):
+        storehouse = upload_storehouse()
+        func(storehouse, *args, **kwargs)
+        save_storehouse(storehouse)
+
+    return wrapper
+
+
 def get_info():
     storehouse = upload_storehouse()
     return storehouse.all_items
 
 
-def add_items(items_list):
+@storehouse_object
+def add_items(storehouse, items_list):
     """
     :param items_list: List of <class 'Item'>
     """
-    storehouse = upload_storehouse()
     storehouse.add_items(items_list)
-    save_storehouse(storehouse)
+
+
+@storehouse_object
+def give_item(storehouse, item_name):
+    storehouse.remove_item(item_name)

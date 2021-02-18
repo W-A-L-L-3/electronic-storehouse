@@ -1,4 +1,5 @@
 # File with storehouse model's class
+import exceptions as exc
 
 
 class Storehouse:
@@ -48,6 +49,14 @@ class Storehouse:
         :param items_list: list of <class 'Item'>
         """
         self.__all_items.extend(items_list)
+
+    def remove_item(self, item_name):
+        for item in self.__all_items:
+            if item.name == item_name:
+                self.__all_items.remove(item)
+                break
+        else:
+            raise exc.ItemNotFoundError
 
     def __test_fill_items(self):
         """Filling items for test"""

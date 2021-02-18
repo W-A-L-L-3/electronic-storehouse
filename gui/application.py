@@ -2,10 +2,11 @@
 
 import tkinter as tk
 
+import exceptions as exc
 import server.operations as server_operations
 import text
-from gui.messageboxes import InfoMb
-from gui.widgets import MainMenu, InfoTable, AddingWList, AddingWButtons
+from gui.messageboxes import InfoMb, ErrorMb
+from gui.widgets import MainMenu, InfoTable, AddingWList, AddingWButtons, GivingWWidgets
 from gui.windowsParameters import WindowParams
 
 
@@ -27,7 +28,8 @@ class MainWindow(tk.Tk):
         self.__menu = MainMenu(self,
                                init_func=server_operations.init,
                                add_func=self.open_adding_window,
-                               info_func=self.open_info_window)
+                               info_func=self.open_info_window,
+                               take_func=self.open_giving_window)
         self.info_window = None
 
     def run(self):
@@ -44,6 +46,11 @@ class MainWindow(tk.Tk):
         self.adding_window = AddingWindow(self,
                                           add_func=server_operations.add_items)
         self.adding_window.draw()
+
+    def open_giving_window(self):
+        self.giving_window = GivingWindow(self,
+                                          give_func=server_operations.give_item)
+        self.giving_window.draw()
 
 
 class ChildWindow(tk.Toplevel):
@@ -104,4 +111,27 @@ class AddingWindow(ChildWindow):
     def draw(self):
         self.__rows.draw()
         self.__buttons.draw()
+        self.set_focus()
+
+
+class GivingWindow(ChildWindow):
+    def __init__(self, parent, give_func):
+        super().__init__(parent,
+                         resizable=(False, False))
+        self.__give_func = give_func
+        self.__widgets = GivingWWidgets(self, self.call_give)
+
+    def call_give(self):
+        try:
+            self.__give_func(item_name=self.__widgets.get_name())
+        except exc.ItemNotFoundError:
+            ErrorMb(title=text.item_not_found_error["title"],
+                    message=text.item_not_found_error["message"]).show()
+        else:
+            InfoMb(title=text.correct_taking["title"],
+                   message=text.correct_taking["message"]).show()
+            self.destroy()
+
+    def draw(self):
+        self.__widgets.draw()
         self.set_focus()

@@ -11,11 +11,13 @@ from server.storehouseModel import Item
 
 
 class MainMenu(tk.Frame):
-    def __init__(self, window, init_func, add_func, info_func):
+    def __init__(self, window, init_func, add_func, info_func, take_func):
         super().__init__(window)
         self.__init_func = init_func
         self.__add_func = add_func
         self.__info_func = info_func
+        self.__take_func = take_func
+
         self.__init_btn = tk.Button(self,
                                     text=text.main_menu["init"],
                                     font=style.Btn.font,
@@ -36,11 +38,12 @@ class MainMenu(tk.Frame):
                                     state=tk.DISABLED,
                                     command=self.__info_func)
 
-        self.__remove_btn = tk.Button(self,
-                                      text=text.main_menu["remove"],
-                                      font=style.Btn.font,
-                                      width=style.Btn.big_width,
-                                      state=tk.DISABLED)
+        self.__take_btn = tk.Button(self,
+                                    text=text.main_menu["take"],
+                                    font=style.Btn.font,
+                                    width=style.Btn.big_width,
+                                    state=tk.DISABLED,
+                                    command=self.__take_func)
 
         self.__remote_info_btn = tk.Button(self,
                                            text=text.main_menu["remote_info"],
@@ -63,14 +66,14 @@ class MainMenu(tk.Frame):
         """Activate buttons for interacting with storehouse"""
         self.__add_btn["state"] = tk.ACTIVE
         self.__info_btn["state"] = tk.ACTIVE
-        self.__remove_btn["state"] = tk.ACTIVE
+        self.__take_btn["state"] = tk.ACTIVE
         self.__remote_info_btn["state"] = tk.ACTIVE
 
     def draw(self):
         self.__init_btn.pack(pady=style.Btn.pady)
         self.__add_btn.pack(pady=style.Btn.pady)
         self.__info_btn.pack(pady=style.Btn.pady)
-        self.__remove_btn.pack(pady=style.Btn.pady)
+        self.__take_btn.pack(pady=style.Btn.pady)
         self.__remote_info_btn.pack(pady=style.Btn.pady)
         self.pack(padx=20, pady=15)
 
@@ -384,3 +387,34 @@ class AddingWButtons(tk.Frame):
         self.__enter_button.pack(side=tk.RIGHT, padx=(10, 0))
         self.__add_row_button.pack(side=tk.RIGHT)
         self.pack(pady=(0, 10), padx=(0, 15), side=tk.RIGHT)
+
+
+class GivingWWidgets(tk.Frame):
+    def __init__(self, window, give_func):
+        super().__init__(window)
+        self.__give_func = give_func
+        self.__label = tk.Label(self,
+                                text=text.info_header[1],
+                                font=style.font)
+
+        self.__field = tk.Entry(self,
+                                font=style.Entry.font,
+                                width=style.Entry.name_f_width)
+
+        self.__button = tk.Button(self,
+                                  text=text.take_btn,
+                                  font=style.Btn.font,
+                                  width=style.Btn.small_width,
+                                  command=self.__give_func)
+
+    def get_name(self):
+        """
+        :return: value of entry
+        """
+        return str(self.__field.get())
+
+    def draw(self):
+        self.__label.pack(pady=(0, 5))
+        self.__field.pack(pady=(0, 10))
+        self.__button.pack()
+        self.pack(padx=15, pady=10)

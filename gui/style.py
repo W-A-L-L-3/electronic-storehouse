@@ -2,6 +2,7 @@
 
 font_name = "Helvetica"
 
+font = (font_name, 12)
 
 class Btn:
     """Style-settings for buttons"""
