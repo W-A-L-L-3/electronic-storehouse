@@ -3,6 +3,8 @@
 import tkinter as tk
 
 import server.operations as server_operations
+import text
+from gui.messageboxes import InfoMb
 from gui.widgets import MainMenu, InfoTable, AddingWList, AddingWButtons
 from gui.windowsParameters import WindowParams
 
@@ -93,9 +95,11 @@ class AddingWindow(ChildWindow):
 
     def add_items(self):
         items_list = self.__rows.get_list()
-        self.__add_items_to_server(items_list)
-        # Close the window
-        print("add")
+        if items_list is not None:  # If all values was correct
+            self.__add_items_to_server(items_list)
+            InfoMb(title=text.correct_adding["title"],
+                   message=text.correct_adding["message"]).show()
+            self.destroy()
 
     def draw(self):
         self.__rows.draw()
