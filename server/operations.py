@@ -5,7 +5,7 @@ import pickle
 import constants as const
 import exceptions
 import server.myRequests as myRequests
-from server.storehouseModel import Storehouse
+from server.storehouseModel import ElectronicStorehouse
 
 
 def init():
@@ -21,7 +21,7 @@ def init():
     except exceptions.ReceivingError:
         return exceptions.RECEIVING_ERROR
     else:
-        storehouse = Storehouse(parameters)
+        storehouse = ElectronicStorehouse(parameters)
     save_storehouse(storehouse)
 
     return exceptions.OK
@@ -48,15 +48,21 @@ def storehouse_object(func):
 
     def wrapper(*args, **kwargs):
         storehouse = upload_storehouse()
-        func(storehouse, *args, **kwargs)
+        res = func(storehouse, *args, **kwargs)
         save_storehouse(storehouse)
+        return res
 
     return wrapper
 
 
-def get_info():
-    storehouse = upload_storehouse()
+@storehouse_object
+def get_info(storehouse):
     return storehouse.all_items
+
+
+@storehouse_object
+def get_remote_info(storehouse):
+    return storehouse.remote_part.all_items
 
 
 @storehouse_object

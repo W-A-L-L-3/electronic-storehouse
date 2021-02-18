@@ -11,12 +11,13 @@ from server.storehouseModel import Item
 
 
 class MainMenu(tk.Frame):
-    def __init__(self, window, init_func, add_func, info_func, take_func):
+    def __init__(self, window, init_func, add_func, info_func, take_func, remote_info_func):
         super().__init__(window)
         self.__init_func = init_func
         self.__add_func = add_func
         self.__info_func = info_func
         self.__take_func = take_func
+        self.__remote_info_func = remote_info_func
 
         self.__init_btn = tk.Button(self,
                                     text=text.main_menu["init"],
@@ -49,7 +50,8 @@ class MainMenu(tk.Frame):
                                            text=text.main_menu["remote_info"],
                                            font=style.Btn.font,
                                            width=style.Btn.big_width,
-                                           state=tk.DISABLED)
+                                           state=tk.DISABLED,
+                                           command=self.__remote_info_func)
 
     def __call_init(self):
         """Call init function and show results"""
@@ -79,12 +81,12 @@ class MainMenu(tk.Frame):
 
 
 class InfoTable(tk.Frame):
-    def __init__(self, window, table):
+    def __init__(self, window, table, need_pos_column):
         super().__init__(window)
-        self.__header = Header(self, need_pos_column=True)
+        self.__header = Header(self, need_pos_column=need_pos_column)
         self.__list = []
         for i in range(len(table)):
-            self.__list.append(InfoRow(self, table[i], (1 + i)))
+            self.__list.append(InfoRow(self, table[i], (1 + i), need_pos_column))
 
     def draw(self):
         self.__header.draw()
@@ -132,7 +134,7 @@ class Header:
 
 class InfoRow:
 
-    def __init__(self, window, item, row_ind):
+    def __init__(self, window, item, row_ind, need_pos_column):
         """
         :param item: <class 'server.storehouseModel.Item'>
         """
@@ -154,10 +156,12 @@ class InfoRow:
         self.__mass = tk.Label(window,
                                text=item.mass,
                                font=style.font_name)
-
-        self.__pos = tk.Label(window,
-                              text=item.pos,
-                              font=style.font_name)
+        if need_pos_column:
+            self.__pos = tk.Label(window,
+                                  text=item.pos,
+                                  font=style.font_name)
+        else:
+            self.__pos = None
 
     def draw(self):
         self.__number.grid(row=self.__row_ind, column=0,
@@ -169,8 +173,9 @@ class InfoRow:
                          padx=style.InfoTable.padx, pady=style.InfoTable.pady)
         self.__mass.grid(row=self.__row_ind, column=3,
                          padx=style.InfoTable.padx, pady=style.InfoTable.pady)
-        self.__pos.grid(row=self.__row_ind, column=4,
-                        padx=(style.InfoTable.padx, 0), pady=style.InfoTable.pady)
+        if self.__pos is not None:
+            self.__pos.grid(row=self.__row_ind, column=4,
+                            padx=(style.InfoTable.padx, 0), pady=style.InfoTable.pady)
 
 
 def exceptions_tracker(func):

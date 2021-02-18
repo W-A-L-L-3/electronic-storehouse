@@ -29,7 +29,8 @@ class MainWindow(tk.Tk):
                                init_func=server_operations.init,
                                add_func=self.open_adding_window,
                                info_func=self.open_info_window,
-                               take_func=self.open_giving_window)
+                               take_func=self.open_giving_window,
+                               remote_info_func=self.open_remote_info_window)
         self.info_window = None
 
     def run(self):
@@ -39,7 +40,7 @@ class MainWindow(tk.Tk):
 
     def open_info_window(self):
         table = server_operations.get_info()
-        self.info_window = InfoWindow(self, table)
+        self.info_window = InfoWindow(self, table, need_pos_column=True)
         self.info_window.draw()
 
     def open_adding_window(self):
@@ -52,6 +53,10 @@ class MainWindow(tk.Tk):
                                           give_func=server_operations.give_item)
         self.giving_window.draw()
 
+    def open_remote_info_window(self):
+        table = server_operations.get_remote_info()
+        self.info_window = InfoWindow(self, table, need_pos_column=False)
+        self.info_window.draw()
 
 class ChildWindow(tk.Toplevel):
     def __init__(self, parent, title="", width=None, height=None,
@@ -76,11 +81,11 @@ class ChildWindow(tk.Toplevel):
 class InfoWindow(ChildWindow):
     """Class of window for information about storehouse"""
 
-    def __init__(self, parent, table):
+    def __init__(self, parent, table, need_pos_column):
         super().__init__(parent,
                          title="Information about storehouse",
                          resizable=(False, False))
-        self.__table = InfoTable(self, table)
+        self.__table = InfoTable(self, table, need_pos_column)
 
     def draw(self):
         self.__table.draw()
