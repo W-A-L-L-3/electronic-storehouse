@@ -66,6 +66,7 @@ class MainMenu(tk.Frame):
 
     def __activate_btns(self):
         """Activate buttons for interacting with storehouse"""
+        self.__init_btn["state"] = tk.DISABLED
         self.__add_btn["state"] = tk.ACTIVE
         self.__info_btn["state"] = tk.ACTIVE
         self.__take_btn["state"] = tk.ACTIVE
