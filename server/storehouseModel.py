@@ -101,6 +101,31 @@ class ElectronicStorehouse(Storehouse):
 
         self.__storage = self.__gen_storage()
 
+    def add_items(self, items_list):
+        """Add new item from the items_list"""
+        for item in items_list:
+            item.pos = self.__add_item_to_the_storage(item)
+            if item.pos == const.Cell.REMOTE:
+                self.remote_part._add_item(item)
+            else:
+                super()._add_item(item)
+
+    def remove_item(self, item_name):
+        try:
+            super().remove_item(item_name)
+        except exc.ItemNotFoundError:
+            self.remote_part.remove_item(item_name)
+
+    def __repr__(self):
+        res = f"""
+"size":
+"size_x": {self.__size.x},
+"size_y": {self.__size.y},
+"size_z": {self.__size.z}
+"merged": {self.__merged}
+"""
+        return res
+
     def __gen_storage(self):
         """
         Generate storage dictionary.
@@ -149,15 +174,6 @@ class ElectronicStorehouse(Storehouse):
             letter = min(first_letter, second_letter) + "-" + max(first_letter, second_letter)
             num = str(min(first_num, second_num)) + "-" + str(max(first_num, second_num))
             return letter + num
-
-    def add_items(self, items_list):
-        """Add new item from the items_list"""
-        for item in items_list:
-            item.pos = self.__add_item_to_the_storage(item)
-            if item.pos == const.Cell.REMOTE:
-                self.remote_part._add_item(item)
-            else:
-                super()._add_item(item)
 
     def __add_item_to_the_storage(self, new_item):
         """Add item object to the storage-dict and return its position"""
@@ -251,16 +267,6 @@ class ElectronicStorehouse(Storehouse):
             return const.Cell.REMOTE
 
         raise ValueError(f"No type defined for the size: {size}")
-
-    def __repr__(self):
-        res = f"""
-"size":
-    "size_x": {self.__size.x},
-    "size_y": {self.__size.y},
-    "size_z": {self.__size.z}
-"merged": {self.__merged}
-"""
-        return res
 
 
 class RemoteStorehouse(Storehouse):
