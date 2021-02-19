@@ -9,3 +9,10 @@ class AddingW:
     NAME_INDEX = 1
     SIZE_INDEX = 2
     MASS_INDEX = 3
+
+
+class Cell:
+    """Size of storehouse's cells"""
+    TYPE_1 = (1000, 1000, 1000)
+    TYPE_2 = (2000, 1000, 1000)
+    TYPE_3 = (2000, 2000, 1000)
