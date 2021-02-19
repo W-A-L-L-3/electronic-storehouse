@@ -17,7 +17,7 @@ class Item:
         :param name: Name of the item <str>
         :param size: Size of the item <tuple> (x, y, z)
         :param mass: Mass of the item <int>
-        :param mass: Position of the item <str>
+        :param pos: Position of the item <str>
         """
         self.name = name
         self.size = size
@@ -35,23 +35,23 @@ class Item:
 
 class Storehouse:
     def __init__(self):
-        self.__all_items = []
+        self._all_items = []
 
     @property
     def all_items(self):
-        return self.__all_items
+        return self._all_items
 
     def add_items(self, items_list):
         """
         Add items to the storehouse
         :param items_list: list of <class 'Item'>
         """
-        self.__all_items.extend(items_list)
+        self._all_items.extend(items_list)
 
     def remove_item(self, item_name):
-        for item in self.__all_items:
+        for item in self._all_items:
             if item.name == item_name:
-                self.__all_items.remove(item)
+                self._all_items.remove(item)
                 break
         else:
             raise exc.ItemNotFoundError
@@ -96,5 +96,5 @@ class ElectronicStorehouse(Storehouse):
 
 
 class RemoteStorehouse(Storehouse):
-    def __init(self):
+    def __init__(self):
         super().__init__()
