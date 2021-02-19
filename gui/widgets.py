@@ -323,7 +323,7 @@ class AddingWRow:
         """
         value = self.__get_size()
         if self.__check_size(value):
-            t = value.split("*")
+            t = map(int, value.split("*"))
             return tuple(t)
         else:
             raise exc.EntryContentError(const.AddingW.SIZE_INDEX)
