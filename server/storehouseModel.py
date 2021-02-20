@@ -1,4 +1,6 @@
 # File with storehouse model's class
+import uuid
+
 import constants as const
 import exceptions as exc
 
@@ -13,6 +15,13 @@ class Size:
 
 
 class Item:
+
+    @staticmethod
+    def __gen_uid(name):
+        """Generate UID(user identifier) by name"""
+        uid = uuid.uuid5(uuid.NAMESPACE_X500, name)
+        return str(uid.hex)
+
     def __init__(self, name, size, mass, pos):
         """
         :param name: Name of the item <str>
@@ -24,6 +33,12 @@ class Item:
         self.size = size
         self.mass = mass
         self.pos = pos
+
+        self.__uid = self.__gen_uid(self.name)
+
+    @property
+    def uid(self):
+        return self.__uid
 
     def __repr__(self):
         r = "==========\n"
@@ -42,7 +57,7 @@ class Storehouse:
     def all_items(self):
         return self._all_items
 
-    def add_items(self, items_list):
+    def add_items(self, items_list, send_to_the_api):
         """
         Add items to the storehouse
         :param items_list: list of <class 'Item'>
@@ -101,7 +116,7 @@ class ElectronicStorehouse(Storehouse):
 
         self.__storage = self.__gen_storage()
 
-    def add_items(self, items_list):
+    def add_items(self, items_list, send_to_the_api):
         """Add new item from the items_list"""
         for item in items_list:
             item.pos = self.__add_item_to_the_storage(item)
@@ -109,6 +124,7 @@ class ElectronicStorehouse(Storehouse):
                 self.remote_part._add_item(item)
             else:
                 super()._add_item(item)
+                send_to_the_api(item)
 
     def remove_item(self, item_name):
         try:
