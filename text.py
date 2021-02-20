@@ -1,4 +1,4 @@
-# File with phrases, witch used in interface
+# File with phrases, which used in interface
 
 main_menu = {
     "init": "Initialize storehouse",
@@ -13,8 +13,8 @@ successful_init = {
     "message": "Successful initialization"
 }
 
-receiving_error = {
-    "title": "Receiving error",
+error_of_getting_parameters = {
+    "title": "Error of getting parameters",
     "message": "An error occurred while getting the parameters."
 }
 
@@ -36,7 +36,7 @@ entry_content_error = {
 
 correct_adding = {
     "title": "Correct adding",
-    "message": "All items was correctly added to the storehouse"
+    "message": "All items were correctly added to the storehouse"
 }
 
 take_btn = "Take"

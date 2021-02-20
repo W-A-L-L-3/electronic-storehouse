@@ -4,7 +4,7 @@ RECEIVING_ERROR = 1
 OK = 0
 
 
-class ReceivingError(Exception):
+class GettingParamsError(Exception):
     pass
 
 
