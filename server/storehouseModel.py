@@ -61,6 +61,7 @@ class Storehouse:
         """
         Add items to the storehouse
         :param items_list: list of <class 'Item'>
+        :param send_to_the_api: func, which will send info about new item to the API
         """
         for item in items_list:
             self._add_item(item)

@@ -35,7 +35,8 @@ class InfoMb(MyMb):
 class ExceptionMb(ErrorMb):
     """Messageboxes for my exceptions"""
 
-    def __get_msg(self, field):
+    @staticmethod
+    def __get_msg(field):
         first_part = text.entry_content_error["message"]
         if field == const.AddingW.NAME_INDEX:
             return first_part + " field 'Name'"

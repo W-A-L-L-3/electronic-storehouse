@@ -68,6 +68,7 @@ def get_remote_info(storehouse):
 @storehouse_object
 def add_items(storehouse, items_list):
     """
+    :param storehouse: Object of storehouse
     :param items_list: List of <class 'Item'>
     """
     storehouse.add_items(items_list, add_item_to_the_api)
