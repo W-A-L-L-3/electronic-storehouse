@@ -40,13 +40,15 @@
 ## :hammer: Как начать
 
 1. Установить [Python 3](https://www.python.org/downloads/)
-2. Установить [Git](https://git-scm.com/download/win)
-3. Клонировать репозиторий
-
-```bash
-git clone https://github.com/W-A-L-L-3/electronic-storehouse
-cd electronic-storehouse
-```
+2. Скачать данный репозиторий
+    * Вариант 1
+        1. Установить [Git](https://git-scm.com/download/win)
+        2. Клонировать репозиторий
+       ```bash
+       git clone https://github.com/W-A-L-L-3/electronic-storehouse
+       cd electronic-storehouse
+       ```
+    * Вариант 2 - [Скачать ZIP](https://github.com/W-A-L-L-3/electronic-storehouse/archive/main.zip)
 
 4. Запустить `./API/app.py`
 5. Запустить `./main.py`
