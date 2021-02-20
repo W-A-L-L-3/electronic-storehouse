@@ -194,7 +194,7 @@ class ElectronicStorehouse(Storehouse):
             return letter + num
 
     def __add_item_to_the_storage(self, new_item):
-        """Add item object to the storage-dict and return its position"""
+        """Add item object to the storage-dict and return it's position"""
         all_1_is_busy = False
         all_2_is_busy = False
 

@@ -26,5 +26,5 @@ class Cell:
 class ItemsSizes:
     SMALL = "small"
     MEDIUM = "medium"
-    BIG = "bid"
+    BIG = "big"
     LARGE = "large"
