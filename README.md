@@ -1,5 +1,11 @@
 # Электронный склад
 
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/Django)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/W-A-L-L-3/electronic-storehouse)
+![GitHub last commit](https://img.shields.io/github/last-commit/W-A-L-L-3/electronic-storehouse)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/W-A-L-L-3/electronic-storehouse)
+![GitHub](https://img.shields.io/github/license/W-A-L-L-3/electronic-storehouse)
+
 [Московская предпрофессиональная олимпиада школьников.](http://predprof.olimpiada.ru/)
 
 [Профиль "Информационные технологии".](http://predprof.olimpiada.ru/it)
