@@ -17,8 +17,8 @@
 * [Авторы](#chapter-5)
 * [Лицензия](#chapter-6)
 
-
 <a id="chapter-0"></a>
+
 ## Описание проекта
 
 Информационный сервис обеспечивающий взаимодействие пользователей (операторов) с автоматизированным складом.
@@ -35,8 +35,8 @@
 4. Наличие удалённого склада для позиций, которые невозможно разместить на основном складе.
 5. Отображение в виде списка позиций (товаров), находящихся на удалённом складе.
 
-
 <a id="chapter-1"></a>
+
 ## :hammer: Как начать
 
 1. Установить [Python 3](https://www.python.org/downloads/)
@@ -51,8 +51,8 @@ cd electronic-storehouse
 4. Запустить `./API/app.py`
 5. Запустить `./main.py`
 
-
 <a id="chapter-2"></a>
+
 ## Интерфейс приложения
 
 ### Главное окно
@@ -79,7 +79,6 @@ cd electronic-storehouse
 
 **5** - Отображение в виде списка позиций (товаров), находящихся на удалённом складе.
 
-
 ### Окно для добавления товаров на склад
 
 ![adding_window_1](docs/img/adding_window_1.jpg)
@@ -92,11 +91,15 @@ cd electronic-storehouse
 
 ![adding_window_2](docs/img/adding_window_2.jpg)
 
-Корректный ввод позиций:
+_Корректный_ ввод позиций:
 
 ![adding_window_3](docs/img/adding_window_3.jpg)
 
-Некорректный ввод позиций:
++ Название - непустая строка
++ Размеры - 3 натуральных числа, разделённых "\*" (длина\*ширина\*высота)
++ Масса - натуральное число
+
+_Некорректный_ ввод позиций:
 
 ![adding_window_4](docs/img/adding_window_4.jpg)
 
@@ -104,11 +107,9 @@ cd electronic-storehouse
 
 ![correct_adding](docs/img/correct_adding.jpg)
 
-
 ### Окно для отображения позиций (товаров), находящихся на складе
 
 ![info_window](docs/img/info_window.jpg)
-
 
 ### Окно для выбора определенного товара (позиции), для осуществления выдачи его аппаратной частью.
 
@@ -118,13 +119,12 @@ cd electronic-storehouse
 
 ![correct_taking](docs/img/correct_taking.jpg)
 
-
 ### Окно для отображения позиций (товаров), находящихся на удалённом складе
 
 ![remote_info_window](docs/img/remote_info_window.jpg)
 
-
 <a id="chapter-3"></a>
+
 ## :heavy_exclamation_mark: Ошибки
 
 ### Ошибка получения параметров при инициализации
@@ -133,7 +133,7 @@ cd electronic-storehouse
 
 **Возможные причины:**
 
-1. Не запущено API (см. пункт 4 раздела "Как начать").
+1. Не запущено API (см. пункт 4 раздела [Как начать](#chapter-1)).
 2. Какая-либо ошибка связи с API.
 
 ### Некорректное значение в каком-либо из полей в поставке
@@ -148,8 +148,8 @@ cd electronic-storehouse
 
 Товара с введённым названием нет на складе.
 
-
 <a id="chapter-4"></a>
+
 ## Код
 
 ### Папки
@@ -166,16 +166,16 @@ cd electronic-storehouse
 * [uuid](https://docs.python.org/3/library/uuid.html) - генерация случайного идентификатора товара
 * [pickle](https://docs.python.org/3/library/pickle.html) - хранение объекта модели склада в бинарном режиме
 
-
 <a id="chapter-5"></a>
+
 ## :smile: Авторы
 
 + [Yu-Leo](https://github.com/Yu-Leo)
 + [kholevenkovav](https://github.com/kholevenkovav)
 + [ASDF2357](https://github.com/ASDF2357)
 
-
 <a id="chapter-6"></a>
+
 ## :open_hands: Лицензия
 
 GNU General Public License v3.0.
