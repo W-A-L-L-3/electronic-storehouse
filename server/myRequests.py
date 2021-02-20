@@ -14,11 +14,11 @@ def get_parameters():
     try:
         response = requests.get(const.GET_PARAMS_ADDRESS, timeout=0.5)
     except (ConnectionError, Timeout):
-        raise exceptions.ReceivingError
+        raise exceptions.GettingParamsError
 
     else:
         if response.status_code != 200:  # If request is not completed successfully
-            raise exceptions.ReceivingError
+            raise exceptions.GettingParamsError
         return response.json()
 
 

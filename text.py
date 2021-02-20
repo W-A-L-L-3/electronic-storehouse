@@ -13,7 +13,7 @@ successful_init = {
     "message": "Successful initialization"
 }
 
-receiving_error = {
+error_of_getting_parameters = {
     "title": "Error of getting parameters",
     "message": "An error occurred while getting the parameters."
 }

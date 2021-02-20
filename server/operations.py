@@ -18,7 +18,7 @@ def init():
     """
     try:
         parameters = myRequests.get_parameters()
-    except exceptions.ReceivingError:
+    except exceptions.GettingParamsError:
         return exceptions.RECEIVING_ERROR
     else:
         storehouse = ElectronicStorehouse(parameters)
