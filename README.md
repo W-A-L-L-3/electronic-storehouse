@@ -17,7 +17,6 @@
 * [Авторы](#chapter-5)
 * [Лицензия](#chapter-6)
 
-____
 
 <a id="chapter-0"></a>
 ## Описание проекта
@@ -36,7 +35,6 @@ ____
 4. Наличие удалённого склада для позиций, которые невозможно разместить на основном складе.
 5. Отображение в виде списка позиций (товаров), находящихся на удалённом складе.
 
-____
 
 <a id="chapter-1"></a>
 ## :hammer: Как начать
@@ -53,7 +51,6 @@ cd electronic-storehouse
 4. Запустить `./API/app.py`
 5. Запустить `./main.py`
 
-____
 
 <a id="chapter-2"></a>
 ## Интерфейс приложения
@@ -126,7 +123,6 @@ ____
 
 ![remote_info_window](docs/img/remote_info_window.jpg)
 
-____
 
 <a id="chapter-3"></a>
 ## :heavy_exclamation_mark: Ошибки
@@ -153,8 +149,6 @@ ____
 Товара с введённым названием нет на складе.
 
 
-____
-
 <a id="chapter-4"></a>
 ## Код
 
@@ -173,8 +167,6 @@ ____
 * [pickle](https://docs.python.org/3/library/pickle.html) - хранение объекта модели склада в бинарном режиме
 
 
-____
-
 <a id="chapter-5"></a>
 ## :smile: Авторы
 
@@ -182,7 +174,6 @@ ____
 + [kholevenkovav](https://github.com/kholevenkovav)
 + [ASDF2357](https://github.com/ASDF2357)
 
-____
 
 <a id="chapter-6"></a>
 ## :open_hands: Лицензия
