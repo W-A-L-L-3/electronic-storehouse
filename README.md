@@ -177,6 +177,7 @@ _Некорректный_ ввод позиций:
 * [json](https://docs.python.org/3/library/json.html) - работа с форматом json
 * [uuid](https://docs.python.org/3/library/uuid.html) - генерация случайного идентификатора товара
 * [pickle](https://docs.python.org/3/library/pickle.html) - хранение объекта модели склада в бинарном режиме
+* [requests](https://requests.readthedocs.io/en/master/) - составление HTTP-запросов
 
 <a id="chapter-5"></a>
 
