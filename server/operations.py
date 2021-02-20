@@ -70,7 +70,14 @@ def add_items(storehouse, items_list):
     """
     :param items_list: List of <class 'Item'>
     """
-    storehouse.add_items(items_list)
+    storehouse.add_items(items_list, add_item_to_the_api)
+
+
+def add_item_to_the_api(item):
+    """
+    Send request to the api with info about new item
+    """
+    myRequests.add_new_item(item)
 
 
 @storehouse_object
