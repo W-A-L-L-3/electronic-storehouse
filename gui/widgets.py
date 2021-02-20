@@ -61,8 +61,8 @@ class MainMenu(tk.Frame):
                       message=text.successful_init["message"]).show()
             self.__activate_btns()
         elif result == exceptions.RECEIVING_ERROR:
-            mb.ErrorMb(title=text.receiving_error["title"],
-                       message=text.receiving_error["message"]).show()
+            mb.ErrorMb(title=text.error_of_getting_parameters["title"],
+                       message=text.error_of_getting_parameters["message"]).show()
 
     def __activate_btns(self):
         """Activate buttons for interacting with storehouse"""
@@ -323,7 +323,7 @@ class AddingWRow:
         """
         value = self.__get_size()
         if self.__check_size(value):
-            t = value.split("*")
+            t = map(int, value.split("*"))
             return tuple(t)
         else:
             raise exc.EntryContentError(const.AddingW.SIZE_INDEX)
