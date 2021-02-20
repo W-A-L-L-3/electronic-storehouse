@@ -34,3 +34,17 @@ def add_new_item(item):
         pass
     else:
         return exceptions.OK
+
+
+def take_item(position):
+    """Request for getting item from the cell"""
+    try:
+        data = {
+            "destination": position
+        }
+        r = requests.post(const.API_ADDRESS, data=json.dumps(data))
+        print(r.status_code, r.reason)
+    except (ConnectionError, Timeout):
+        pass
+    else:
+        return exceptions.OK

@@ -72,10 +72,11 @@ class Storehouse:
         """
         self._all_items.append(item)
 
-    def remove_item(self, item_name):
+    def remove_item(self, item_name, take_item_api_func):
         for item in self._all_items:
             if item.name == item_name:
                 self._all_items.remove(item)
+                take_item_api_func(item.pos)
                 break
         else:
             raise exc.ItemNotFoundError
@@ -126,11 +127,11 @@ class ElectronicStorehouse(Storehouse):
                 super()._add_item(item)
                 send_to_the_api(item)
 
-    def remove_item(self, item_name):
+    def remove_item(self, item_name, take_item_api_func):
         try:
-            super().remove_item(item_name)
+            super().remove_item(item_name, take_item_api_func)
         except exc.ItemNotFoundError:
-            self.remote_part.remove_item(item_name)
+            self.remote_part.remove_item(item_name, take_item_api_func)
 
     def __repr__(self):
         res = f"""
