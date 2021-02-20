@@ -82,4 +82,11 @@ def add_item_to_the_api(item):
 
 @storehouse_object
 def give_item(storehouse, item_name):
-    storehouse.remove_item(item_name)
+    storehouse.remove_item(item_name, take_item_from_the_api)
+
+
+def take_item_from_the_api(pos):
+    """
+    Send request to the api to take item from pos
+    """
+    myRequests.take_item(pos)
