@@ -171,10 +171,15 @@ _Некорректный_ ввод позиций:
 <a id="chapter-5"></a>
 
 ## :smile: Авторы
-
-+ [Yu-Leo](https://github.com/Yu-Leo)
-+ [kholevenkovav](https://github.com/kholevenkovav)
-+ [ASDF2357](https://github.com/ASDF2357)
+<a href="https://github.com/Yu-Leo">
+    <img src="https://avatars3.githubusercontent.com/u/66430048?s=400&u=48f180775538c9967cc45bb4fc07ced723063a6e&v=4" width="50px">
+</a>
+<a href="https://github.com/kholevenkovav">
+    <img src="https://avatars3.githubusercontent.com/u/56455393?s=400&u=baa1b3fb667896e8cc43b0a4902ada8b143e4d7b&v=4" width="50px">
+</a>
+<a href="https://github.com/ASDF2357">
+    <img src="https://avatars3.githubusercontent.com/u/67108097?s=400&v=4" width="50px">
+</a> 
 
 <a id="chapter-6"></a>
 
